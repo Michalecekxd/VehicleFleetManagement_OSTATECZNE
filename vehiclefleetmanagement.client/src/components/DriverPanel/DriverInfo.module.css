@@ -1,0 +1,93 @@
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 40px;
+    background: #fafafa;
+    border-radius: 20px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 37px;
+    color: #1e1e1e;
+    margin-bottom: 40px;
+    gap: 12px;
+}
+
+.titleIcon {
+    font-size: 37px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+.field {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: nowrap;
+}
+
+.icon {
+    font-size: 22px;
+    color: #3498db;
+    min-width: 24px;
+}
+
+.label {
+    font-weight: 700;
+    color: #444;
+    font-size: 20px;
+    flex: 0 0 auto;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.value {
+    font-weight: 500;
+    color: #111;
+    font-size: 22px;
+    flex: 0 0 auto;
+    margin-left: auto;
+    text-align: right;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
+}
+
+@media (max-width: 700px) {
+    .card {
+        grid-template-columns: 1fr;
+    }
+
+    .value {
+        text-align: left;
+        margin-left: 0;
+    }
+}
+
+
+.driverId {
+    margin-left: 8px;
+    padding: 4px 10px;
+    font-size: 0.8em;
+    font-weight: 700;
+    color: #fff;
+    background-color: #3498db;
+    border-radius: 12px;
+    white-space: nowrap;
+}
+
+.titleText {
+    font-size: inherit;
+}

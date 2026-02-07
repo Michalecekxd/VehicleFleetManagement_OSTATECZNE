@@ -1,0 +1,70 @@
+.routeInfoContainer {
+    background: #f9f9f9;
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.routeInfoHeader {
+    font-weight: bold;
+    font-size: 1.15rem;
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.routeInfoItem {
+    cursor: pointer;
+    padding: 6px 10px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    width: calc(33.33% - 10px);
+    box-sizing: border-box;
+    flex-grow: 1;
+}
+
+    .routeInfoItem:hover:not(.selected) {
+        background: #c7d2e7;
+    }
+
+    .routeInfoItem:not(.selected) {
+        border: 1px solid #ddd;
+    }
+
+.selected {
+    border: 1px solid #348be7;
+    background: #e0f0ff;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.routeLabel {
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    margin-right: 6px;
+}
+
+.icon {
+    font-size: 1.4rem;
+    color: #348be7;
+}
+
+.routeDetails {
+    font-size: 1.2rem;
+    color: #666;
+    flex-grow: 1;
+    text-align: left;
+    white-space: normal;
+    word-wrap: break-word;
+}

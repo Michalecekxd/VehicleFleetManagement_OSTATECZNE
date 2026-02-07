@@ -1,0 +1,165 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.modalContent {
+    position: relative;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    width: 55%;
+    height: 90%;
+    min-width: 500px;
+    min-height: 300px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+    .modalContent h3 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #333 !important;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+    width: 35px;
+    height: 35px;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+    .closeButton:hover {
+        background-color: #555 !important;
+    }
+
+.form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.topFormSection {
+    flex-shrink: 0;
+    margin-bottom: 10px;
+}
+
+.inputGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    font-size: 18px !important;
+    padding: 10px 12px !important;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+.labelField {
+    font-size: 1.2rem;
+    margin: 0;
+    line-height: 1;
+    margin-bottom: 4px; 
+}
+
+
+.labelContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    margin-bottom: 2px;
+}
+
+.infoIcon {
+    color: #999;
+    cursor: help;
+    font-size: 1.10rem;
+    margin-bottom: 0.35rem;
+}
+
+.inputField input {
+    padding: 18px 12px !important;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 1px; 
+}
+
+.clickableInput {
+    cursor: pointer;
+    background-color: #f0f0f0;
+}
+
+    .clickableInput:hover {
+        background-color: #e0e0e0;
+    }
+
+.mapSection {
+    flex: 1;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.mapContainer {
+    width: 100%;
+    height: 100%;
+}
+
+.addButton {
+    flex-shrink: 0;
+    align-self: flex-end;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+    .addButton:hover {
+        background-color: #0056b3;
+    }
+
+.errorMessage {
+    color: #ff4d4d;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.addButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}

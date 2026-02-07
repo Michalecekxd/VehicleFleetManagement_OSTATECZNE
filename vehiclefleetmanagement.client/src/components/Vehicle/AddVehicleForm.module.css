@@ -1,0 +1,112 @@
+﻿.modalContainer {
+    position: relative;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    min-height: 200px;
+    height: auto;
+    max-height: 120vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+    .modalContainer span {
+        font-size: 1.15rem;
+    }
+
+    .modalContainer h2 {
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+
+    .modalContainer h3 {
+        color: #4e4848;
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+
+    .modalContainer button {
+        padding: 8px 14px;
+        background-color: #333;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin-top: 15px;
+        transition: background-color 0.3s;
+    }
+
+        .modalContainer button:hover {
+            background-color: #555;
+        }
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.inputField {
+    font-size: 1.18rem !important;
+    padding: 10px 12px !important;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.labelField {
+    font-size: 1.28rem;
+    margin-bottom: -10px !important;
+}
+
+.selectField {
+    font-size: 1.12rem;
+    padding: 12px 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+    .selectField:hover {
+        cursor: pointer;
+    }
+
+.closeButton {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+    width: auto;
+    height: auto;
+    color: #333;
+}
+
+.clickableInput {
+    cursor: pointer;
+    background-color: #f0f0f0;
+}
+
+    .clickableInput:hover {
+        background-color: #e0e0e0;
+    }
+
+.addButton {
+    background-color: #007bff !important;
+    color: white;
+    border: none;
+    padding: 12px 16px !important;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1.15rem;
+}
+
+    .addButton:hover {
+        background-color: #2c6edc !important;
+    }

@@ -1,0 +1,179 @@
+﻿.mapContainer {
+    z-index: 2;
+    left: 55px;
+    top: 70px;
+    bottom: 25px;
+    width: calc(142.8vw - 55px);
+    height: calc(143vh - 70px - 25px);
+    position: fixed;
+}
+
+
+.loadingOverlay {
+    position: absolute;
+    top: 0;
+    left: 55px;
+    width: calc(142.8vw - 55px);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 122;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.popupContainer {
+    transition: opacity 0.15s;
+}
+
+.popupContent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 103%;
+    padding-right: 5px;
+}
+
+.popupContent button {
+    font-size: 1.09rem;
+}
+
+
+.vehicleInfo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.vehicleType {
+    flex-grow: 1;
+    font-weight: bold;
+    font-size: 1.29rem;
+    width: 110%;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.statusIcon {
+    font-size: 18px;
+    margin-bottom: 4px;
+    margin-left: 15px;
+}
+
+.driverContact {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 6px;
+    align-items: center;
+}
+
+
+.contactItem {
+    display: flex;
+    align-items: center;
+    font-size: 1.13rem;
+}
+
+    .contactItem:first-child .icon {
+        margin-bottom: 0.19rem; 
+    }
+
+    .contactItem:nth-child(2) .icon {
+        font-size: 1.14rem;
+        margin-bottom: 0.08rem;
+    }
+
+.lastModified {
+    display: flex;
+    align-items: center;
+    font-size: 1.13rem;
+    margin-bottom: 6px;
+    white-space: nowrap;
+}
+
+    .lastModified .icon {
+        font-size: 1.37rem;
+    }
+
+.icon {
+    flex-shrink: 0; 
+    margin-right: 5px;
+    font-size: 20px;
+    margin-bottom: 0.1rem;
+    color: #4f4f4f;
+}
+
+.addressContainer {
+    display: flex;
+    align-items: center;
+}
+
+.loadInfo .icon {
+    margin-bottom: 0.08rem !important;
+}
+
+.marker {
+    background-color: #E1DADA;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    border: 5px solid;
+}
+
+.loadInfo {
+    display: flex;
+    align-items: center;
+    font-size: 1.12rem;
+    margin-bottom: 8px;
+}
+.loadInfo .icon {
+    margin-right: 0.4rem;
+    font-size: 1.28rem;
+    margin-bottom: 0.07rem;
+}
+
+.disabledButton {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.baseMarker span {
+    font-size: 18px;
+    color: green; 
+}
+
+
+.baseInfo {
+    display: flex;
+    align-items: center;
+    font-size: 1.13rem;
+    margin-bottom: 8px;
+}
+
+    .baseInfo .icon {
+        margin-right: 0.5rem; 
+        font-size: 1.69rem !important; 
+        margin-bottom: 0; 
+        margin-bottom: 5px;
+        vertical-align: middle;
+    }

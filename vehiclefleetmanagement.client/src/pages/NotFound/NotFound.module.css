@@ -1,0 +1,29 @@
+/* src/pages/NotFound/NotFound.module.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 70px - 25px);
+}
+
+.content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    width: calc(100% - 55px);
+}
+
+h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #ff4d4f;
+}
+
+p {
+    font-size: 18px;
+    color: #666;
+}
+

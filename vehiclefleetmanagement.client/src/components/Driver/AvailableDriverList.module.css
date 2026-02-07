@@ -1,0 +1,114 @@
+.chooseDriverModalContainer {
+    position: relative;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    width: 65%;
+    max-height: 700px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 1.3rem;
+}
+
+    .chooseDriverModalContainer h3 {
+        color: #4e4848;
+    }
+
+.vehicleList1 {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 600px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.headerRow, .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 12px 10px;
+}
+
+.headerRow {
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+    position: sticky;
+    top: 0;
+    background-color: #ece8e8;
+    border-radius: 13px 13px 13px 13px;
+    height: 50px;
+    font-size: 1.4rem;
+}
+
+.headerItem, .dataItem {
+    flex: 1;
+    text-align: center;
+    padding: 0 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+    .headerItem:first-child, .dataItem:first-child {
+        flex: 0 0 50px;
+    }
+
+    .headerItem:last-child, .dataItem:last-child {
+        flex: 0 0 120px;
+    }
+
+.item {
+    border-bottom: 1px solid #ccc;
+    transition: background-color 0.3s;
+    font-size: 1.2rem;
+}
+
+    .item:last-child {
+        border-bottom: none;
+    }
+
+    .item:hover {
+        background-color: #cec3c3;
+    }
+
+    .item button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: background-color 0.3s ease;
+        font-size: 1.3rem;
+    }
+
+        .item button:hover {
+            background-color: #195fd4;
+        }
+
+.failMessage {
+    color: red;
+    margin-left: 0;
+    font-size: 1.25rem;
+}
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #333;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+    width: 35px;
+    height: 35px;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+    .closeButton:hover {
+        background-color: #555;
+    }

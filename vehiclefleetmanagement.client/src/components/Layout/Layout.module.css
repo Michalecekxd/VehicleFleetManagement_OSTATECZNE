@@ -1,0 +1,56 @@
+/*Layout.module.css*/
+/*.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}*/
+
+.body {
+    display: flex;
+    flex-direction: row;
+    margin-top: 70px;
+    margin-bottom: 25px;
+    justify-content: space-between;
+    width: 100%; 
+}
+
+
+.mainContent {
+    flex: 1;
+    position: relative;
+
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: row; 
+    position: fixed;
+    top: 70px;
+    bottom: 25px;
+    left: 0;
+    width: 143vw;
+    z-index: 10;
+}
+
+.driverMessage {
+    display: flex;
+    width: 143vw;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.driverMessage h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.driverMessage p {
+    color: #666;
+    font-size: 1.2rem;
+}

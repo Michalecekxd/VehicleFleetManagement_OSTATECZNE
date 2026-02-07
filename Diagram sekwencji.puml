@@ -1,0 +1,159 @@
+@startuml
+actor Użytkownik
+participant "Frontend\nAddVehicleForm\n(React)" as Frontend
+participant "Backend API\nVehicleController\n(ASP.NET Core)" as Backend
+database "Baza danych\n(PostgreSQL)" as DB
+
+== Wypełnienie formularza ==
+Użytkownik -> Frontend: Wypełnia formularz\n(numer rejestracyjny, marka, typ, itp.)
+activate Użytkownik
+activate Frontend
+Użytkownik -> Frontend: Klika przycisk "Dodaj"
+
+== Walidacja pól formularza ==
+Frontend -> Frontend: Walidacja HTML5\n(pola required)
+activate Frontend
+deactivate Frontend
+
+alt Jedno lub więcej pól pustych
+    Frontend -> Użytkownik: Komunikat "Wypełnij to pole"
+    deactivate Frontend
+
+else Pola wypełnione 
+== Sprawdzenie unikalności numeru rejestracyjnego  ==
+    Frontend -> Frontend: Pobranie numeru rejestracyjnego\nz formularza
+    activate Frontend
+    activate Frontend
+    deactivate Frontend
+
+    Frontend ->> Backend: GET /api/vehicle/check\n?registrationNumber=\nformData.registrationNumber
+    activate Backend
+    deactivate Frontend
+    Backend -> DB: Sprawdzenie czy numer rejestracyjny istnieje\n
+    alt Wystąpił błąd odczytu 
+                activate DB
+                deactivate Backend
+                DB --> Backend: Exception
+                activate Backend
+                deactivate DB
+                Backend --> Frontend: StatusCode 500\nInternal server error
+                activate Frontend
+                deactivate Backend
+                Frontend -> Użytkownik: Wyświetlenie informacji o błędzie
+                deactivate Frontend
+            else Odczyt powiódł się
+                activate DB
+                DB --> Backend: Wynik sprawdzenia\n(exists: true/false)     
+                activate Backend          
+                deactivate DB 
+                Backend --> Frontend: {exists: true/false}   
+                activate Frontend
+                deactivate Backend
+
+
+
+
+    alt Numer rejestracyjny już istnieje
+        Frontend -> Użytkownik: Błąd: "Pojazd z podanym numerem\nrejestracyjnym już istnieje"
+        deactivate Frontend
+
+    else Numer rejestracyjny jest unikalny
+
+        == Wysłanie żądania dodania pojazdu ==
+        Frontend -> Frontend: Tworzenie obiektu newVehicle\nz danych formularza\n(konwersja na format JSON)
+        activate Frontend
+        activate Frontend
+        deactivate Frontend
+        Frontend ->> Backend: POST /api/vehicle\n(JSON z danymi pojazdu)
+        activate Backend
+        deactivate Frontend
+
+      end
+ end
+end
+        == Przetwarzanie w backendzie ==
+
+        Backend -> Backend: Zamiana (deserializacja) JSON\nna obiekt klasy Vehicle (vehicle)
+        activate Backend
+        deactivate Backend
+
+        Backend -> Backend: [ApiController] dokonuje walidacji modelu-\nsprawdzenie poprawności deserializacji i \natrybutów ([Required()],[RequiredIf()],[Range()])
+        activate Backend
+        deactivate Backend
+     
+        alt Model nie jest poprawny
+            Backend --> Frontend: BadRequest (400)\nz błędami walidacji
+            activate Frontend
+            deactivate Backend
+            Frontend -> Użytkownik: Wyświetlenie błędów walidacji
+            deactivate Frontend
+
+        else Model jest poprawny
+== Próba dodania pojazdu do bazy danych ==
+            Backend -> Backend: _context.Vehicles.Add(vehicle)-\ndodanie vehicle do kontekstu w pamięci
+            activate Backend
+            activate Backend
+            deactivate Backend
+            Backend ->> DB: _context.SaveChangesAsync()-\nzapis do bazy
+            activate DB
+            deactivate Backend
+
+            alt Wystąpił błąd zapisu
+                DB --> Backend: Exception
+                activate Backend
+                deactivate DB
+                Backend --> Frontend: StatusCode 500\nInternal server error
+                activate Frontend
+                deactivate Backend
+                Frontend -> Użytkownik: Wyświetlenie informacji o błędzie
+                deactivate Frontend
+
+            else Zapis powiódł się
+                activate DB
+                DB --> Backend: Potwierdzenie zapisu
+                activate Backend
+                deactivate DB
+                Backend --> Frontend: Zwrócenie danych pojazdu\n(201- Created)
+                activate Frontend
+                deactivate Backend
+                deactivate Backend
+            end
+        end
+
+        == Aktualizacja interfejsu ==
+        activate Frontend
+        Frontend -> Frontend: Zamknięcie modala
+        activate Frontend
+        deactivate Frontend
+        Frontend ->> Backend: GET /api/vehicle\n(odświeżenie listy)
+        activate Backend
+        deactivate Frontend
+        Backend ->> DB: Pobranie listy pojazdów
+        activate DB
+        deactivate Backend
+
+        alt Błąd pobrania listy
+            DB --> Backend: Exception
+            activate Backend
+            deactivate DB
+            Backend --> Frontend: StatusCode 500\nInternal server error
+            activate Frontend
+            deactivate Backend
+            Frontend -> Użytkownik: Wyświetlenie informacji o błędzie
+            deactivate Frontend
+        else Lista pobrana poprawnie
+            activate DB
+            DB --> Backend: Lista pojazdów (vehicles)
+            activate Backend
+            deactivate DB
+            Backend --> Frontend: Lista pojazdów (JSON)
+            activate Frontend
+            deactivate Backend
+            Frontend -> Użytkownik: Wyświetlenie listy pojazdów
+            deactivate Frontend
+        end
+    
+
+
+deactivate Użytkownik
+@enduml

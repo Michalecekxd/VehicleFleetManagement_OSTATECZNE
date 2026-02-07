@@ -1,0 +1,135 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+}
+
+
+.modalContainer {
+    position: relative;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    width: 70%;
+    max-height: 720px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.modalContainer h3{
+    font-size: 1.8rem
+}
+
+    .modalContainer h4 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #333 !important;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+    .closeButton:hover {
+        background-color: #555 !important;
+    }
+
+.scrollableList,
+.scrollableSetList {
+    max-height: 260px;
+    overflow-y: auto;
+    margin-top: 10px;
+    padding-right: 10px;
+}
+
+
+.headerRow, .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 5px;
+}
+
+
+.headerRow {
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+    position: sticky;
+    top: 0;
+    background-color: #ece8e8;
+    border-radius: 13px;
+    height: 70px;
+}
+
+
+.headerItem, .dataItem {
+    flex: 1;
+    text-align: center;
+    padding: 0 5px;
+    display: flex;
+    font-size: 1.25rem;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+    .headerItem:first-child, .dataItem:first-child {
+        flex: 0 0 60px;
+    }
+
+    .headerItem:last-child, .dataItem:last-child {
+        flex: 0 0 120px; 
+    }
+
+.item {
+    border-bottom: 1px solid #ccc;
+    transition: background-color 0.1s;
+}
+
+    .item:last-child {
+        border-bottom: none;
+    }
+
+
+    .item:hover {
+        background-color: #cec3c3;
+    }
+
+
+    .item button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px 10px;
+        font-size: 1.2rem;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+
+        .item button:hover {
+            background-color: #195fd4;
+        }
+
+.icon svg {
+    width: 33px;
+    height: 33px;
+}

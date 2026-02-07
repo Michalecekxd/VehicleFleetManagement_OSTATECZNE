@@ -1,0 +1,268 @@
+﻿.sidebar {
+    position: relative;
+    width: 55px;
+    background-color: #5a5454;
+    overflow-y: auto;
+    z-index: 5;
+    flex-shrink: 0;
+    height: calc(143vh - 70px - 25px);
+}
+
+.iconContainer {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.icon {
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 55px;
+    height: 55px;
+    background-color: #5a5454;
+    border-bottom: 1px solid #333;
+    margin: 0 auto;
+    transition: background-color 0.3s ease;
+}
+
+
+    .icon.activeIcon {
+        background-color: #948686;
+    }
+
+    .icon svg {
+        transition: transform 0.2s;
+    }
+
+    .icon:hover svg {
+        transform: scale(1.10);
+    }
+
+.stickySection {
+    position: fixed;
+    top: 70px;
+    left: 55px;
+    min-width: 340px;
+    max-width: 500px;
+    width: 22.8vw;
+    background-color: #e0e0e0;
+    padding: 13px;
+    padding-right: 0;
+    z-index: 10;
+}
+
+.filtersContainer {
+    position: sticky;
+    background-color: #e0e0e0;
+    margin-top: 10px;
+    z-index: 9;
+}
+
+
+.expandedContainer {
+    min-width: 340px;
+    height: calc(143vh - 70px - 25px);
+    width: 24vw;
+    max-width: 500px;
+    background-color: #e0e0e0;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 1000;
+    padding-top: 128px !important;
+}
+
+
+    .expandedContainer label {
+        font-size: 1.35rem;
+    }
+
+    .expandedContainer.active {
+        opacity: 1;
+        padding: 10px;
+        pointer-events: auto;
+    }
+
+
+    .expandedContainer div {
+        font-size: 1.11rem;
+    }
+
+.headerContainer {
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+.vehicleList {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px !important;
+    margin: 0;
+    overflow-y: auto;
+    max-height: calc(143vh - 70px - 25px - 138px);
+}
+
+.vehicleItem {
+    position: relative;
+    background-color: #f4f4f4;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .vehicleItem:hover {
+        background-color: #e0e0e0;
+    }
+
+    .vehicleItem.selected {
+        background-color: #ccc;
+    }
+
+.vehicleHeader {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+    .vehicleHeader svg {
+        margin-right: 4px;
+    }
+
+.vehicleDetails {
+    color: #797272;
+}
+
+.driversContainer {
+    position: absolute;
+    left: 55px;
+    width: calc(143vw - 55px);
+    height: calc(143vh - 70px - 25px);
+    background-color: #e0e0e0;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 5;
+}
+
+
+.failMessage {
+    color: red;
+    margin-left: 0;
+}
+
+.vehiclesHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+    .vehiclesHeader h3 {
+        font-size: 1.7rem;
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+
+
+.addVehicleIcon {
+    font-size: 2em;
+    cursor: pointer;
+    color: #007bff;
+}
+
+    .addVehicleIcon:hover {
+        color: #0056b3;
+    }
+
+.vehicleInfo {
+    display: flex;
+    align-items: center;
+}
+
+.statusIconsContainer {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.availableDot {
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50%;
+}
+
+.onTheRoadDot {
+    width: 10px;
+    height: 10px;
+    background-color: blue;
+    border-radius: 50%;
+}
+
+.returningToBaseDot {
+    width: 10px;
+    height: 10px;
+    background-color: purple;
+    border-radius: 50%;
+}
+
+.custom-select {
+    width: 700px !important;
+}
+
+.repairIcon {
+    color: red;
+    font-size: 1.2em;
+}
+
+.vehicleHead {
+    font-size: 1.18rem !important;
+    font-weight: 600;
+}
+
+.stickySection select  {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 2px 30px 2px 2px;
+    color: #333;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    width: auto;
+    position: relative;
+    background-image: url('data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M7.41%2010.59L12%2015.17l4.59-4.58%20L18%2011.58l-6%206-6-6z%22%20fill%3D%22%23333%22%2F%3E%3C%2Fsvg%3E');
+    background-position: 100%;
+    background-repeat: no-repeat;
+    background-size: 1.2em;
+}

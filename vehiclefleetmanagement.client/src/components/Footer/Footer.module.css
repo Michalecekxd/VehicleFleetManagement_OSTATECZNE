@@ -1,0 +1,21 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    background-color: #a9a1a1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+    .footer div {
+        white-space: nowrap;
+        max-width: 100%;
+        color: #e8dfdf;
+        text-overflow: ellipsis;
+        font-size: 0.8rem;
+        padding-left: 10px;
+        margin: 0;
+    }

@@ -1,0 +1,110 @@
+/* Header.module.css */
+.header {
+    z-index:10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 142.8vw;
+    height: 70px;
+    background-color: #dbdfdf;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    border-bottom: 1px solid #d8d1d1;
+}
+
+.nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.navList {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+    .navList li {
+        margin-right: 15px;
+    }
+
+.logoItem {
+    margin-left: -6px;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    height: 50px;
+    width: auto;
+}
+
+    .logo:hover {
+        cursor: pointer;
+    }
+
+.logoutItem {
+    margin-left: auto;
+}
+
+.logoutButton {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #007bff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+    .logoutButton:hover {
+        background-color: #e0e0e0;
+        color: #0056b3;
+    }
+
+.loginItem {
+    margin-left: auto;
+}
+
+.loginButton {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #007bff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+    .loginButton:hover {
+        background-color: #e0e0e0;
+        color: #0056b3;
+    }
+
+.loginIcon,
+.logoutIcon {
+    margin-right: 5px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+    nav a:hover {
+        color: #007bff;
+    }

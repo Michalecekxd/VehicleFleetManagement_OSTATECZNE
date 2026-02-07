@@ -1,0 +1,141 @@
+.driverListContainer {
+    width: 100%;
+    padding: 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.driverTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    overflow: auto;
+    transform-origin: top left;
+}
+
+    .driverTable th,
+    .driverTable td {
+        border: 1px solid #ddd;
+        padding: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .driverTable th {
+        background-color: #e6f7ff;
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+        .driverTable th:nth-child(6),
+        .driverTable td:nth-child(6) {
+            text-align: center; 
+        }
+
+        .driverTable th:nth-child(7),
+        .driverTable td:nth-child(7),
+        .driverTable th:nth-child(1),
+        .driverTable th:nth-child(2),
+        .driverTable th:nth-child(3),
+        .driverTable th:nth-child(4),
+        .driverTable th:nth-child(5),
+        .driverTable td:nth-child(1),
+        .driverTable td:nth-child(2),
+        .driverTable td:nth-child(3),
+        .driverTable td:nth-child(4),
+        .driverTable td:nth-child(5) {
+            text-align: left;
+        }
+
+        .driverTable th:nth-child(8),
+        .driverTable td:nth-child(8) {
+            text-align: center !important;
+        }
+
+        .driverTable th:nth-child(8) {
+            text-align: center;
+            vertical-align: middle; 
+            font-weight: bold; 
+        }
+
+    .driverTable tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .driverTable tbody tr:nth-child(odd) {
+        background-color: #ffffff;
+    }
+
+    .driverTable tbody tr:hover {
+        background-color: #d6eaf8;
+    }
+
+    .driverTable .statusIcon,
+    .driverTable .actionIcon {
+        display: inline-block;
+        font-size: 1.625rem;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .driverTable .availableIcon {
+        color: #438920;
+    }
+
+    .driverTable .busyIcon {
+        color: black;
+    }
+
+    .driverTable .statusText {
+        font-size: 1.18rem;
+    }
+
+.busyStatus::after {
+    content: "x";
+    visibility: hidden;
+}
+
+.driverHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+}
+
+.driverIcon {
+    top: 2px;
+    position: relative;
+    margin-top: 6px !important;
+    color: #3388c8;
+    font-size: 1.7rem;
+    margin-right: 0.625rem;
+}
+
+.driverHeader span {
+    font-size: 1.9rem;
+    font-weight: bold;
+}
+
+.addPersonIcon {
+    z-index: 13;
+    font-size: 1.75rem;
+    color: #3388c8;
+    cursor: pointer;
+}
+
+    .addPersonIcon:hover {
+        color: #0056b3;
+    }
+
+.failMessage {
+    color: #666;
+    margin-left: 0;
+    font-size: 1.125rem;
+}
+
+.loading {
+    text-align: left;
+    margin-left: 0;
+    font-size: 1.125rem;
+}

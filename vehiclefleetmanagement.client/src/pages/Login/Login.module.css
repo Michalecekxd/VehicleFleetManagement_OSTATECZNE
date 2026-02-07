@@ -1,0 +1,157 @@
+﻿.wrapper {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    display: flex;
+    justify-content: center;
+}
+
+.formContainer {
+    box-sizing: border-box;
+    max-width: 700px; 
+    padding: 80px 60px; 
+    background-color: #d1d6db;
+    border-radius: 16px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2); 
+    border: 1px solid #b0b8c1;
+    text-align: center;
+}
+
+.loginHeader {
+    font-size: 2rem;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.loginImage {
+    display: block;
+    margin: -10px auto 20px auto;
+    max-width: 90%;
+    height: auto;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px; 
+    text-align: left;
+}
+
+    .inputGroup:nth-of-type(1) {
+        margin-bottom: 30px;
+    }
+
+    .inputGroup label {
+        font-size: 1.8rem; 
+        margin-bottom: 10px;
+        color: #555;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .inputGroup:first-of-type {
+        margin-top: -10px;
+    }
+
+    .inputGroup:nth-of-type(2) {
+        margin-top: -10px;
+    }
+
+.inputWrapper {
+    position: relative;
+}
+
+    .inputWrapper input {
+        width: 100%;
+        padding: 20px !important; 
+        font-size: 20px !important; 
+        border: 1px solid #ccc;
+        border-radius: 8px; 
+        transition: border-color 0.3s;
+    }
+
+        .inputWrapper input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+.icon {
+    font-size: 24px;
+    color: #007bff;
+}
+
+.toggleIcon {
+    position: absolute;
+    right: 15px;
+    transform: translateY(75%);
+    cursor: pointer;
+    color: #007bff;
+    font-size: 24px;
+}
+
+.error {
+    display: block;
+    margin-top: 5px;
+    font-size: 1.2rem;
+    color: red;
+    min-height: 25px;
+}
+
+.submitButton {
+    width: 100%;
+    padding: 15px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .submitButton:hover {
+        background-color: #0056b3;
+    }
+
+.message {
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+    min-height: 25px;
+}
+
+@media (max-width: 600px) {
+    .formContainer {
+        max-width: 90%;
+        padding: 50px 25px;
+    }
+
+    .inputGroup label {
+        font-size: 1.4rem;
+    }
+
+    .inputWrapper input {
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    .submitButton {
+        font-size: 18px;
+        padding: 12px;
+    }
+}
+
+input[type="password"]::-ms-clear,
+input[type="password"]::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+input[type="password"]::-webkit-textfield-decoration-container {
+    display: none;
+}
+
+input[type="password"] {
+    -webkit-appearance: none;
+    appearance: none;
+}

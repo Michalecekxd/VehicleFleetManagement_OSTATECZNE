@@ -1,0 +1,15 @@
+SYNCHRONIZUJE GITHUB Z TWOIM PROGRAMEM (pobiera z githuba i wrzuca do kodu twojego)
+git pull origin master
+
+git status // czy są jakies pliki do dodania? czyli te zmienione od ostatniego commita - jesli tak to pokaz ktore
+
+1. KOMENDY RAZEM WPISYWAC NAJLEPIEJ
+cofa zmiany o 1 commit wstecz (cofa commit ale zachowuje lokalnie zmiany)
+git reset HEAD~1 
+2. TE DWIE KOEMNDY RAZEM WPISYWAC NAJLEPIEJ
+git push origin --force (USUWA Z GITHUBA OSTATNI COMMIT)
+
+
+git add .   // dodaje zmiany ponownie
+git commit -m "poprawiony commit" 
+git push origin master <--- pushuje znowu
