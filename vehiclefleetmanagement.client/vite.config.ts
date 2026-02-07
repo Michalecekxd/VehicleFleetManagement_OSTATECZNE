@@ -1,7 +1,7 @@
 import { fileURLToPath, URL } from 'node:url';
 
 import { defineConfig } from 'vite';
-import * as  reactPlugin from '@vitejs/plugin-react';
+import  react from '@vitejs/plugin-react';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as child_process from 'child_process';
@@ -39,7 +39,7 @@ if (!fs.existsSync(certFilePath) || !fs.existsSync(keyFilePath)) {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [reactPlugin.default()],
+    plugins: [react()],
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url))
