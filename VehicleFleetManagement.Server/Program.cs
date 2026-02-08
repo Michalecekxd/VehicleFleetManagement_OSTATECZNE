@@ -72,6 +72,9 @@ app.Map("/ws", async context =>
     await webSocketService.HandleWebSocketAsync(context);
 });
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 // Authentication and Authorization middleware
 app.UseAuthentication();
 app.UseAuthorization();
@@ -80,7 +83,7 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapIdentityApi<User>();
 
-
+app.MapFallbackToFile("index.html");
 
 app.Run();
 
