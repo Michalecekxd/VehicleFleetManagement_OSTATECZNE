@@ -20,7 +20,7 @@ const Home = () => {
                     <button>Zaloguj się</button>
                 </Link>
                 <Link to="/register">
-                    <button>Zarejestruj się</button>
+                    {/*<button>Zarejestruj się</button>*/}
                 </Link>
             </div>
         </div>

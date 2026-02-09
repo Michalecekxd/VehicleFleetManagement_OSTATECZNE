@@ -99,7 +99,8 @@ const Layout: React.FC = () => {
     useEffect(() => {
         if (wsRef.current) return;
         const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-        const ws = new WebSocket(`${protocol}//localhost:7012/ws`);
+        const host = window.location.host; // zwraca domenę np. https://flotapojazdow-dxa4g9hrejb0dfd0.germanywestcentral-01.azurewebsites.net/
+        const ws = new WebSocket(`${protocol}//${host}/ws`);
         wsRef.current = ws;
 
         ws.onopen = () => setLoading(false);
