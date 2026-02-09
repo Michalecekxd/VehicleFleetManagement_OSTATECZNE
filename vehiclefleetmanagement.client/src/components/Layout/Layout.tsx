@@ -98,14 +98,15 @@ const Layout: React.FC = () => {
     // Inicjalizacja WebSocket i aktualizacja listy pojazdów
     useEffect(() => {
         if (wsRef.current) return;
-        const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-        const host = window.location.host; // zwraca domenę np. https://flotapojazdow-dxa4g9hrejb0dfd0.germanywestcentral-01.azurewebsites.net/
-        const ws = new WebSocket(`${protocol}//${host}/ws`);
+
+        const wsUrl = import.meta.env.VITE_WS_URL; // URL WebSocket jako Zmienna środowiskowa
+        const ws = new WebSocket(wsUrl);
         wsRef.current = ws;
 
         ws.onopen = () => setLoading(false);
-        // Klient odbiera dane z serwera
+
         ws.onmessage = event => {
+
             try {
                 const raw: any[] = JSON.parse(event.data);
                 if (Array.isArray(raw)) {

@@ -1,6 +1,7 @@
 ﻿using ExpressiveAnnotations.Analysis;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.WebSockets;
@@ -14,14 +15,15 @@ public class WebSocketService
 {
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly ConfigService _configService;
-    private readonly List<WebSocket> _sockets = new List<WebSocket>();
+    private readonly ConcurrentDictionary<Guid, WebSocket> _sockets = new();
     //private List<VehicleData> _cachedVehicles = new List<VehicleData>();
     //private DateTime _lastCacheUpdate = DateTime.MinValue;
     private readonly RouteService _routeService;
 
     // Kolekcja przechowująca tylko symulacje powrotu do bazy
-    private readonly Dictionary<int, List<(Task task, CancellationTokenSource cancellationTokenSource)>> _simulationTasks = new();
-    private readonly Dictionary<int, int?> _deliveryRouteIndexes = new();
+    private readonly ConcurrentDictionary<int, List<(Task, CancellationTokenSource)>> _simulationTasks = new();
+    private readonly ConcurrentDictionary<int, int?> _deliveryRouteIndexes = new();
+
 
 
     public WebSocketService(IServiceScopeFactory scopeFactory, ConfigService configService, RouteService routeService)
@@ -40,15 +42,18 @@ public class WebSocketService
         }
 
         var socket = await context.WebSockets.AcceptWebSocketAsync();
-        _sockets.Add(socket);
+        var socketId = Guid.NewGuid();
+        _sockets.TryAdd(socketId, socket);
+
 
         List<VehicleData> vehicles;
-
 
         //Serwer wysyla dane do klientow
         try
         {
-            while (socket.State == WebSocketState.Open)
+            while (!context.RequestAborted.IsCancellationRequested &&
+                   socket.State == WebSocketState.Open)
+
             {
                 using (var scope = _scopeFactory.CreateScope())
                 {
@@ -114,16 +119,18 @@ public class WebSocketService
                 var json = JsonSerializer.Serialize(vehicles);
                 var buffer = Encoding.UTF8.GetBytes(json);
 
-                foreach (var client in _sockets)
+                if (socket.State == WebSocketState.Open)
                 {
-                    if (client.State == WebSocketState.Open)
-                    {
-                        await client.SendAsync(new ArraySegment<byte>(buffer),
-                                               WebSocketMessageType.Text,
-                                               true,
-                                               CancellationToken.None);
-                    }
+                    await socket.SendAsync(
+                        buffer,
+                        WebSocketMessageType.Text,
+                        true,
+                        CancellationToken.None
+                    );
                 }
+
+
+
                 await Task.Delay(3000);
             }
         }
@@ -133,7 +140,7 @@ public class WebSocketService
         }
         finally
         {
-            _sockets.Remove(socket);
+            _sockets.TryRemove(socketId, out _);
             Console.WriteLine("❌ WebSocket: Client disconnected");
         }
     }
@@ -199,7 +206,7 @@ public class WebSocketService
                     pendingDelivery.EndLongitude, pendingDelivery.EndLatitude,
                     selectedRouteIndex);
 
-                _deliveryRouteIndexes.Remove(pendingDelivery.Id);
+                _deliveryRouteIndexes.TryRemove(pendingDelivery.Id, out _);
 
                 // Rozpoczynamy symulację nowej dostawy rekurencyjnie
                 await SimulateDeliveryAsync(vehicleId, newRouteToStart, newRouteToDestination);
@@ -355,7 +362,7 @@ public class WebSocketService
                     Console.WriteLine($"Error canceling simulation for vehicle ID {vehicleId}: {ex.Message}");
                 }
             }
-            _simulationTasks.Remove(vehicleId); // Usuwamy symulację pojazdu
+            _simulationTasks.TryRemove(vehicleId, out _);   // Usuwamy symulację pojazdu
         }
         else
         {
