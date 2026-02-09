@@ -3,7 +3,7 @@
 const Footer = () => {
     return (
         <footer className={styles.footer}>
-            <div>© 2025 Flotomania. Wszelkie prawa zastrzeżone.</div>
+            <div>© 2025 FlotomaniaXDDDDDDD. Wszelkie prawa zastrzeżone.</div>
         </footer>
     );
 };
