@@ -72,8 +72,13 @@ app.Map("/ws", async context =>
     await webSocketService.HandleWebSocketAsync(context);
 });
 
-app.UseDefaultFiles();
-app.UseStaticFiles();
+// Only serve static files in Production (not in Development)
+// In Development, frontend runs separately on port 57838 via Vite dev server
+if (!app.Environment.IsDevelopment())
+{
+    app.UseDefaultFiles();
+    app.UseStaticFiles();
+}
 
 // Authentication and Authorization middleware
 app.UseAuthentication();
@@ -83,7 +88,11 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapIdentityApi<User>();
 
-app.MapFallbackToFile("index.html");
+// Only fallback to index.html in Production
+if (!app.Environment.IsDevelopment())
+{
+    app.MapFallbackToFile("index.html");
+}
 
 app.Run();
 
