@@ -125,8 +125,10 @@ const AddOrderForm: React.FC<AddOrderFormProps> = ({
             endAddress: endAddress,
         };
 
+        const API = import.meta.env.VITE_API_URL;
+
         try {
-            const response = await fetch("/api/delivery", {
+            const response = await fetch(`${API}/api/delivery`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

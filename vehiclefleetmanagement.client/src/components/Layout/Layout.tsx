@@ -62,6 +62,7 @@ const Layout: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const wsRef = useRef<WebSocket | null>(null);
     const [baseLocation, setBaseLocation] = useState<{ latitude: number; longitude: number } | null>(null);
+    const API = import.meta.env.VITE_API_URL;
 
     // Pokazuje szczegóły pojazdu w panelu
     const handleShowVehicleDetails = async (vehicleId: number) => {
@@ -69,7 +70,7 @@ const Layout: React.FC = () => {
         setActiveMenu("vehicles");
         // Pobierz szczegóły i ustaw stan
         try {
-            const res = await fetch(`/api/vehicle/${vehicleId}`);
+            const res = await fetch(`${API}/api/vehicle/${vehicleId}`);
             if (!res.ok) throw new Error(`Błąd pobierania pojazdu ${vehicleId}`);
             const data: Vehicle = await res.json();
             setSelectedVehicle(data);
@@ -162,7 +163,7 @@ const Layout: React.FC = () => {
     useEffect(() => {
         (async () => {
             try {
-                const res = await fetch("/api/config");
+                const res = await fetch(`${API}/api/config`);
                 if (res.ok) setBaseLocation(await res.json());
             } catch (err) {
                 console.error(err);

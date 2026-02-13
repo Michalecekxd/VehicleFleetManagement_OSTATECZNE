@@ -16,6 +16,7 @@ const AddBreakdownForm: React.FC<AddBreakdownFormProps> = ({ vehicleId, semiTrai
     const [error, setError] = useState('');
     const [dateError, setDateError] = useState('');
     const [selectedVehicle, setSelectedVehicle] = useState(vehicleId);
+    const API = import.meta.env.VITE_API_URL;
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -37,7 +38,7 @@ const AddBreakdownForm: React.FC<AddBreakdownFormProps> = ({ vehicleId, semiTrai
             setDateError('');
             setError('');
 
-            const response = await fetch(`/api/breakdown?vehicleId=${selectedVehicle}`, {
+            const response = await fetch(`${API}/api/breakdown?vehicleId=${selectedVehicle}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

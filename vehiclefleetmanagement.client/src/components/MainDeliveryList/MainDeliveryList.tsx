@@ -65,14 +65,15 @@ const MainDeliveryList: React.FC = () => {
     const [ordersMap, setOrdersMap] = useState<Record<number, boolean>>({});
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const API = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         const fetchAll = async () => {
             try {
                 const [delRes, vehRes, ordRes] = await Promise.all([
-                    fetch('/api/delivery'),
-                    fetch('/api/vehicle'),
-                    fetch('/api/order'),
+                    fetch(`${API}/api/delivery`),
+                    fetch(`${API}/api/vehicle`),
+                    fetch(`${API}/api/order`),
                 ]);
                 if (!delRes.ok) throw new Error(`Dostawy HTTP ${delRes.status}`);
                 if (!vehRes.ok) throw new Error(`Pojazdy HTTP ${vehRes.status}`);

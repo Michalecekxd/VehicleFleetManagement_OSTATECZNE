@@ -14,13 +14,14 @@ const UnassignDriver: React.FC<UnassignDriverProps> = ({ vehicleId, vehicleStatu
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isUnassigning, setIsUnassigning] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const API = import.meta.env.VITE_API_URL;
 
     const handleUnassign = async () => {
         setIsUnassigning(true);
         setError(null);
 
         try {
-            const response = await fetch(`/api/vehicle/unassign-driver/${vehicleId}`, {
+            const response = await fetch(`${API}/api/vehicle/unassign-driver/${vehicleId}`, {
                 method: 'PUT'
             });
 
@@ -28,7 +29,7 @@ const UnassignDriver: React.FC<UnassignDriverProps> = ({ vehicleId, vehicleStatu
                 throw new Error('Failed to unassign driver');
             }
 
-            const updatedVehicleResponse = await fetch(`/api/vehicle/${vehicleId}`);
+            const updatedVehicleResponse = await fetch(`${API}/api/vehicle/${vehicleId}`);
             if (!updatedVehicleResponse.ok) {
                 throw new Error('Failed to fetch updated vehicle data');
             }

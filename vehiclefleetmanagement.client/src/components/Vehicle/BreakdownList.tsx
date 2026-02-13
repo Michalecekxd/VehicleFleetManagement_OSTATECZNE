@@ -22,6 +22,8 @@ interface BreakdownListProps {
     vehicle: any;
 }
 
+const API = import.meta.env.VITE_API_URL;
+
 const BreakdownList: React.FC<BreakdownListProps> = ({
     breakdowns,
     vehicleId,
@@ -34,7 +36,7 @@ const BreakdownList: React.FC<BreakdownListProps> = ({
 
     const handleFinishBreakdown = async (breakdownId: number) => {
         try {
-            const response = await fetch(`/api/breakdown/${breakdownId}/end`, {
+            const response = await fetch(`${API}/api/breakdown/${breakdownId}/end`, {
                 method: 'PATCH',
             });
             if (!response.ok) {

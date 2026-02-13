@@ -38,6 +38,8 @@ const getStatusText = (status: number): string => {
     }
 };
 
+const API = import.meta.env.VITE_API_URL;
+
 const InfoForDriver: React.FC = () => {
     const [deliveries, setDeliveries] = useState<Delivery[]>([]);
     const [loading, setLoading] = useState(true);
@@ -48,7 +50,7 @@ const InfoForDriver: React.FC = () => {
 
         async function fetchDeliveries() {
             try {
-                const res = await fetch('/api/delivery/driver', { credentials: 'include' });
+                const res = await fetch(`${API}/api/delivery/driver`, { credentials: 'include' });
                 if (!res.ok) throw new Error('Nie udało się pobrać dostaw');
                 const data: Delivery[] = await res.json();
                 const sorted = data.sort((a, b) => b.orderId - a.orderId);

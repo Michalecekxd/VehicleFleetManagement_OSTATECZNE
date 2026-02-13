@@ -99,6 +99,7 @@ const OrderListComponent: React.FC<DeliveryListProps> = ({
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [initialLoaded, setInitialLoaded] = useState(false);
+    const API = import.meta.env.VITE_API_URL;
 
     const [extendedDeliveryMap, setExtendedDeliveryMap] = useState<
         Record<number, ExtendedInfo>
@@ -125,7 +126,7 @@ const OrderListComponent: React.FC<DeliveryListProps> = ({
             setError(null);
 
             try {
-                const response = await fetch(`/api/vehicle/${selectedVehicle.id}`);
+                const response = await fetch(`${API}/api/vehicle/${selectedVehicle.id}`);
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const data = await response.json();
 
@@ -204,10 +205,11 @@ const OrderListComponent: React.FC<DeliveryListProps> = ({
         );
     };
 
+
     const handleCancelDelivery = async (deliveryId: number) => {
         try {
             const resp = await fetch(
-                `/api/delivery/${deliveryId}/cancel`,
+                `${API}/api/delivery/${deliveryId}/cancel`,
                 { method: "POST" }
             );
             if (!resp.ok) throw new Error("Nie udało się anulować dostawy.");

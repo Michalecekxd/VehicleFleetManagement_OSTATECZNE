@@ -16,6 +16,8 @@ const AddDriverForm: React.FC<AddDriverFormProps> = ({ closeModal, onDriverAdded
     });
     const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
+    const API = import.meta.env.VITE_API_URL;
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
 
@@ -42,7 +44,7 @@ const AddDriverForm: React.FC<AddDriverFormProps> = ({ closeModal, onDriverAdded
 
         try {
             // Wyślij zapytanie do API, aby dodać kierowcę
-            const response = await fetch("/api/driver", {
+            const response = await fetch(`${API}/api/driver`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

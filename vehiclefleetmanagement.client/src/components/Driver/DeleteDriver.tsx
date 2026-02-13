@@ -13,13 +13,14 @@ const DeleteDriver: React.FC<DeleteDriverProps> = ({ driverId, driverName, onDel
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const API = import.meta.env.VITE_API_URL;
 
     const handleDelete = async () => {
         setIsDeleting(true);
         setError(null);
 
         try {
-            const response = await fetch(`/api/driver/${driverId}`, {
+            const response = await fetch(`${API}/api/driver/${driverId}`, {
                 method: 'DELETE'
             });
 

@@ -13,13 +13,14 @@ const DeleteVehicle: React.FC<DeleteVehicleProps> = ({ vehicleId, onDeleteSucces
     const [isDeleting, setIsDeleting] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const API = import.meta.env.VITE_API_URL;
 
     const handleDelete = async () => {
         setIsDeleting(true);
         setError(null);
 
         try {
-            const response = await fetch(`/api/vehicle/${vehicleId}?vehicleType=${vehicleType}`, {
+            const response = await fetch(`${API}/api/vehicle/${vehicleId}?vehicleType=${vehicleType}`, {
                 method: 'DELETE'
             });
 

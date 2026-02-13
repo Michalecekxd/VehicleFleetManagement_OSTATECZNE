@@ -94,6 +94,8 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
         DeliveryVan: 5
     };
 
+    const API = import.meta.env.VITE_API_URL;
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -109,7 +111,7 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
             }
 
             try {
-                const response = await fetch(`/api/vehicle/update/${tractorUnitId}`, {
+                const response = await fetch(`${API}/api/vehicle/update/${tractorUnitId}`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
@@ -137,7 +139,7 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
 
             if (["RigidTruck", "DeliveryVan", "TractorUnit", "SemiTrailer"].includes(vehicleType)) {
                 try {
-                    const checkResponse = await fetch(`/api/vehicle/check?registrationNumber=${formData.registrationNumber}`);
+                    const checkResponse = await fetch(`${API}/api/vehicle/check?registrationNumber=${formData.registrationNumber}`);
                     if (!checkResponse.ok) {
                         const backendText = await checkResponse.text();
                         throw new Error(backendText || "Błąd podczas weryfikacji numeru rejestracyjnego.");
@@ -187,7 +189,7 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
             }
 
             try {
-                const response = await fetch("/api/vehicle", {
+                const response = await fetch(`${API}/api/vehicle`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

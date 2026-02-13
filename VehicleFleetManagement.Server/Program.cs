@@ -24,7 +24,10 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend",
              policy =>
              {
-                 policy.WithOrigins("https://localhost:57838")  // Frontend domain
+                 policy.WithOrigins(
+                        "https://localhost:57838",   // frontend domain dev
+                        "http://localhost"           // frontend domain production
+                        )
                        .AllowAnyMethod()
                        .AllowAnyHeader()
                        .AllowCredentials();
@@ -55,11 +58,11 @@ app.UseCors("AllowFrontend");
 await SeedManagerAccount(app.Services);
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 app.UseHttpsRedirection();  // Redirect HTTP to HTTPS
 app.UseWebSockets();  // Enable WebSockets

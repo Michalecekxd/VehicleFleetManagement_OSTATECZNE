@@ -14,10 +14,11 @@ const SplitSemiTrailerTruck: React.FC<SplitSemiTrailerTruckProps> = ({
 }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const API = import.meta.env.VITE_API_URL;
 
     const handleSplit = async () => {
         try {
-            const response = await fetch(`/api/vehicle/split/${vehicleId}`, {
+            const response = await fetch(`${API}/api/vehicle/split/${vehicleId}`, {
                 method: 'PUT',
             });
 

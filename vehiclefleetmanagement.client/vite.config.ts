@@ -7,30 +7,37 @@ import * as path from 'path';
 import * as child_process from 'child_process';
 import { env } from 'process';
 
-const baseFolder =
-    env.APPDATA !== undefined && env.APPDATA !== ''
-        ? `${env.APPDATA}/ASP.NET/https`
-        : `${env.HOME}/.aspnet/https`;
+const isDev = process.env.NODE_ENV === 'development';
 
-const certificateName = "vehiclefleetmanagement.client";
-const certFilePath = path.join(baseFolder, `${certificateName}.pem`);
-const keyFilePath = path.join(baseFolder, `${certificateName}.key`);
+let certFilePath: string;
+let keyFilePath: string;
 
-if (!fs.existsSync(baseFolder)) {
-    fs.mkdirSync(baseFolder, { recursive: true });
-}
+if (isDev) {
+    const baseFolder =
+        env.APPDATA !== undefined && env.APPDATA !== ''
+            ? `${env.APPDATA}/ASP.NET/https`
+            : `${env.HOME}/.aspnet/https`;
 
-if (!fs.existsSync(certFilePath) || !fs.existsSync(keyFilePath)) {
-    if (0 !== child_process.spawnSync('dotnet', [
-        'dev-certs',
-        'https',
-        '--export-path',
-        certFilePath,
-        '--format',
-        'Pem',
-        '--no-password',
-    ], { stdio: 'inherit', }).status) {
-        throw new Error("Could not create certificate.");
+    const certificateName = "vehiclefleetmanagement.client";
+    certFilePath = path.join(baseFolder, `${certificateName}.pem`);
+    keyFilePath = path.join(baseFolder, `${certificateName}.key`);
+
+    if (!fs.existsSync(baseFolder)) {
+        fs.mkdirSync(baseFolder, { recursive: true });
+    }
+
+    if (!fs.existsSync(certFilePath) || !fs.existsSync(keyFilePath)) {
+        if (0 !== child_process.spawnSync('dotnet', [
+            'dev-certs',
+            'https',
+            '--export-path',
+            certFilePath,
+            '--format',
+            'Pem',
+            '--no-password',
+        ], { stdio: 'inherit', }).status) {
+            throw new Error("Could not create certificate.");
+        }
     }
 }
 
@@ -46,45 +53,56 @@ export default defineConfig({
         }
     },
     server: {
-        proxy: {
-            '^/api/auth': {
-                target: 'https://localhost:7012',  // redirect queries to the backend ( we dont need write fetch('https://localhost:7012/api/auth/register'...)- instead of this we write fetch('/api/auth/register'...)
-                secure: false           // ingore SSL 
-            },
-            '^/api/vehicle': {
-                target: 'https://localhost:7012',
-                secure: false
-            },
-             '^/api/driver': {
-                target: 'https://localhost:7012',
-                secure: false
-            },
-               '^/api/breakdown': {
-                target: 'https://localhost:7012',
-                secure: false
-            },
-            '^/api/delivery': {
-                target: 'https://localhost:7012',
-                secure: false
-            },
-            '^/api/config': {
-                target: 'https://localhost:7012',
-                secure: false
-            },
-            '^/api/order': {
-                target: 'https://localhost:7012',
-                secure: false
-            },
-            '^/api/osrmproxy': {
-                target: 'https://localhost:7012',
-                secure: false
-            },
+        proxy: { //brak proxy , bo nie potrzebujemy gdy jest w Program.cs rejestracja uzycia CORS , czyli :
+            //builder.Services.AddCors(options => {
+            //    options.AddPolicy("AllowFrontend",
+            //        policy => {
+            //            policy.WithOrigins("https://localhost:57838")  // Frontend domain
+            //                .AllowAnyMethod()
+            //                .AllowAnyHeader()
+            //                .AllowCredentials();
+            //        });
+            //}); // wiec nie ptorzebujemy:
+            //'^/api/auth': {
+            //    target: 'https://localhost:7012',  // redirect queries to the backend ( we dont need write fetch('https://localhost:7012/api/auth/register'...)- instead of this we write fetch('/api/auth/register'...)
+            //    secure: false           // ingore SSL 
+            //},
+            //'^/api/vehicle': {
+            //    target: 'https://localhost:7012',
+            //    secure: false
+            //},
+            //'^/api/driver': {
+            //    target: 'https://localhost:7012',
+            //    secure: false
+            //},
+            //'^/api/breakdown': {
+            //    target: 'https://localhost:7012',
+            //    secure: false
+            //},
+            //'^/api/delivery': {
+            //    target: 'https://localhost:7012',
+            //    secure: false
+            //},
+            //'^/api/config': {
+            //    target: 'https://localhost:7012',
+            //    secure: false
+            //},
+            //'^/api/order': {
+            //    target: 'https://localhost:7012',
+            //    secure: false
+            //},
+            //'^/api/osrmproxy': {
+            //    target: 'https://localhost:7012',
+            //    secure: false
+            //},
 
         },
         port: 57838,
-        https: {
-            key: fs.readFileSync(keyFilePath),
-            cert: fs.readFileSync(certFilePath),
-        }
+        ...(isDev && {
+            https: {
+                key: fs.readFileSync(keyFilePath!),
+                cert: fs.readFileSync(certFilePath!),
+            }
+        })
     }
-})
+});

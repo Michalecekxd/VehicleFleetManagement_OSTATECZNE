@@ -20,9 +20,10 @@ const AvailableDriverList: React.FC<AvailableDriverListProps> = ({ onDriverSelec
     const [drivers, setDrivers] = useState<Driver[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const API = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
-        fetch("/api/driver")
+        fetch(`${API}/api/driver`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -44,7 +45,7 @@ const AvailableDriverList: React.FC<AvailableDriverListProps> = ({ onDriverSelec
 
     const handleDriverSelect = async (driverId: number) => {
         try {
-            const response = await fetch(`/api/driver/assign`, {
+            const response = await fetch(`${API}/api/driver/assign`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -59,7 +60,7 @@ const AvailableDriverList: React.FC<AvailableDriverListProps> = ({ onDriverSelec
             }
 
 
-            const updatedVehicleResponse = await fetch(`/api/vehicle/${vehicleId}`);
+            const updatedVehicleResponse = await fetch(`${API}/api/vehicle/${vehicleId}`);
             const updatedVehicle = await updatedVehicleResponse.json();
 
             onDriverSelect(updatedVehicle);

@@ -9,6 +9,7 @@ const TractorUnitList: React.FC<TractorUnitListProps> = ({ onSelect }) => {
     const [tractorUnits, setTractorUnits] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const API = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         const fetchTractorUnits = async () => {
@@ -16,7 +17,7 @@ const TractorUnitList: React.FC<TractorUnitListProps> = ({ onSelect }) => {
             setError(null);
 
             try {
-                const response = await fetch("/api/vehicle?type=TractorUnit");
+                const response = await fetch(`${API}/api/vehicle?type=TractorUnit`);
                 if (!response.ok) {
                     throw new Error(`Error fetching TractorUnit: ${response.status}`);
                 }

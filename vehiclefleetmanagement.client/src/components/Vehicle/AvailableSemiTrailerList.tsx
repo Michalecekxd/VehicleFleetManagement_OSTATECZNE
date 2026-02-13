@@ -9,6 +9,7 @@ const SemiTrailerList: React.FC<SemiTrailerListProps> = ({ onSelect }) => {
     const [semiTrailers, setSemiTrailers] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const API = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         const fetchSemiTrailers = async () => {
@@ -16,7 +17,7 @@ const SemiTrailerList: React.FC<SemiTrailerListProps> = ({ onSelect }) => {
             setError(null);
 
             try {
-                const response = await fetch("/api/vehicle?type=SemiTrailer");
+                const response = await fetch(`${API}/api/vehicle?type=SemiTrailer`);
                 if (!response.ok) {
                     if (response.status === 404) {
                         setSemiTrailers([]);
@@ -26,7 +27,7 @@ const SemiTrailerList: React.FC<SemiTrailerListProps> = ({ onSelect }) => {
                 }
                 const allSemiTrailers = await response.json();
 
-                const setsResponse = await fetch("/api/vehicle?type=SemiTrailerTruck");
+                const setsResponse = await fetch(`{API}/api/vehicle?type=SemiTrailerTruck`);
                 let assignedSemiTrailerIds: number[] = [];
 
                 if (setsResponse.ok) {

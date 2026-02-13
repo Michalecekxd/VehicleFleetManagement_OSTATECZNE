@@ -22,9 +22,10 @@ const DriverInfo: React.FC = () => {
     const [info, setInfo] = useState<DriverDto | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const API = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
-        fetch("/api/driver/driverinfo", { credentials: "include" })
+        fetch(`${API}/api/driver/driverinfo`, { credentials: "include" })
             .then((res) => {
                 if (!res.ok) throw new Error(`Błąd: ${res.status}`);
                 return res.json();

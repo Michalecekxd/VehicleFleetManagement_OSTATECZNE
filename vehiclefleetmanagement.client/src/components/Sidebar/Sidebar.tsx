@@ -111,6 +111,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedVehicle, setSelectedVehicle, 
             return updatedDrivers;
         });
     };
+    const API = import.meta.env.VITE_API_URL;
 
 
     //useEffect(() => {
@@ -142,13 +143,13 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedVehicle, setSelectedVehicle, 
                 setIsLoading(true);
             }
 
-            fetch("/api/vehicle")
+            fetch(`${API}/api/vehicle`)
                 .then((response) => response.json())
                 .then((data: any) => {
                     if (storedVehicles && JSON.stringify(data) === storedVehicles) {
                         setIsLoading(false);
                     } else {
-                        fetch("/api/vehicle?type=3")
+                        fetch(`${API}/api/vehicle?type=3`)
                             .then((response) => {
                                 if (response.status === 404) {
                                     console.warn("Nie znaleziono zestawów (type 3)");
@@ -218,7 +219,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedVehicle, setSelectedVehicle, 
             const storedData = JSON.parse(storedDrivers);
 
             try {
-                const response = await fetch("/api/driver");
+                const response = await fetch(`${API}/api/driver`);
                 if (!response.ok) throw new Error("Błąd podczas pobierania danych z serwera.");
 
                 const dataFromServer = await response.json();
@@ -240,7 +241,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedVehicle, setSelectedVehicle, 
         } else {
             setLoadingDrivers(true);
             try {
-                const response = await fetch("/api/driver");
+                const response = await fetch(`${API}/api/driver`);
                 if (!response.ok) throw new Error("Błąd podczas pobierania danych z serwera.");
                 const data = await response.json();
                 setDrivers(data);
@@ -305,7 +306,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedVehicle, setSelectedVehicle, 
         setSelectedTractorUnitDetails(null);
 
         try {
-            const response = await fetch(`/api/vehicle/${tractorUnitId}`);
+            const response = await fetch(`${API}/api/vehicle/${tractorUnitId}`);
             if (!response.ok) {
                 throw new Error(`Error fetching TractorUnit: ${response.status}`);
             }
@@ -348,7 +349,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedVehicle, setSelectedVehicle, 
     const handleVehicleClick = (vehicle: any) => {
         if (!vehicle) return;
 
-        fetch(`/api/vehicle/${vehicle.id}`)
+        fetch(`${API}/api/vehicle/${vehicle.id}`)
             .then(response => response.json())
             .then(data => {
                 setSelectedVehicle(data);

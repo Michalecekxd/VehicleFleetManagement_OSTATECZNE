@@ -22,6 +22,8 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
+    const API = import.meta.env.VITE_API_URL;
+
 
     useEffect(() => {
         if (localStorage.getItem("token")) {
@@ -49,7 +51,7 @@ const Login = () => {
         setErrors({ emailError: emailValidation, passwordError: passwordValidation });
         if (emailValidation || passwordValidation) return;
         try {
-            const response = await fetch('/api/auth/login', {
+            const response = await fetch(`${API}/api/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),

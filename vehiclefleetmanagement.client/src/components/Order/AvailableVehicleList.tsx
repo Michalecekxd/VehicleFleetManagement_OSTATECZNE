@@ -33,11 +33,12 @@ const AvailableVehicleList: React.FC<AvailableVehicleListProps> = ({ onSelect, o
         4: <div className={styles.icon}><VehicleIcon4 /></div>,
         5: <div className={styles.icon}><VehicleIcon5 /></div>,
     };
+    const API = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         const fetchVehicles = async () => {
             try {
-                const response = await fetch("/api/vehicle?status=1");
+                const response = await fetch(`${API}/api/vehicle?status=1`);
                 if (!response.ok) {
                     throw new Error("Błąd podczas pobierania dostępnych pojazdów.");
                 }
