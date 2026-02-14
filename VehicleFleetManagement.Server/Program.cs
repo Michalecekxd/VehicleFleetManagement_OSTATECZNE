@@ -26,7 +26,8 @@ builder.Services.AddCors(options =>
              {
                  policy.WithOrigins(
                         "https://localhost:57838",   // frontend domain dev
-                        "http://localhost"           // frontend domain production
+                        "http://localhost",           // frontend domain production
+                        "https://vehiclefleet-frontend.azurewebsites.net"  // frontend domain production
                         )
                        .AllowAnyMethod()
                        .AllowAnyHeader()
