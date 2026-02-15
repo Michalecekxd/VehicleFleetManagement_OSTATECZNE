@@ -4,8 +4,9 @@ using System.Drawing;
 using VehicleFleetManagement.Server.Enums;
 using VehicleFleetManagement.Server.Models.DataModels;
 
-namespace VehicleFleetManagement.Server.Controllers
+namespace VehicleFleetManagement.Server.Controllers.V2
 {
+    [ApiVersion("2.0")]
     [Route("api/breakdown")]
     [ApiController]
     public class BreakdownController : ControllerBase

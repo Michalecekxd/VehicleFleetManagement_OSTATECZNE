@@ -2,8 +2,9 @@
 using VehicleFleetManagement.Server.Models;
 using System;
 
-namespace VehicleFleetManagement.Server.Controllers
+namespace VehicleFleetManagement.Server.Controllers.V1
 {
+    [ApiVersion("1.0")]
     [Route("api/config")]
     [ApiController]
     public class ConfigController : ControllerBase

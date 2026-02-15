@@ -7,8 +7,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using VehicleFleetManagement.Server.Models;
 
-namespace VehicleFleetManagement.Server.Controllers
+namespace VehicleFleetManagement.Server.Controllers.V2
 {
+    [ApiVersion("2.0")]
     [Route("api/vehicle")]
     [ApiController] 
     //- mozna zastosowac, wtedy nie piszemy (!ModelState.IsValid), bo samo robi to za nas (sprawdza z modelu Required, Range itp). 

@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
+using VehicleFleetManagement.Server.Enums;
+using VehicleFleetManagement.Server.Models;
 using VehicleFleetManagement.Server.Models.DataModels;
 using VehicleFleetManagement.Server.Models.Identity;
-using VehicleFleetManagement.Server.Models;
-using VehicleFleetManagement.Server.Enums;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +43,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();
+
 
 // Loading configuration from appsettings.json
 builder.Services.Configure<ManagerData>(builder.Configuration.GetSection("ManagerData"));
@@ -51,6 +55,18 @@ builder.Services.AddSingleton<WebSocketService>();
 builder.Services.AddSingleton<ConfigService>();
 builder.Services.AddSingleton<RouteService>();
 
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.ReportApiVersions = true;
+});
+
+builder.Services.AddVersionedApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVVV";
+    options.SubstituteApiVersionInUrl = true;
+});
 
 var app = builder.Build();
 
@@ -62,8 +78,19 @@ await SeedManagerAccount(app.Services);
 //if (app.Environment.IsDevelopment())
 //{
     app.UseSwagger();
-    app.UseSwaggerUI();
 //}
+
+var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+
+app.UseSwaggerUI(options =>
+{
+    foreach (var description in provider.ApiVersionDescriptions)
+    {
+        options.SwaggerEndpoint(
+            $"/swagger/{description.GroupName}/swagger.json",
+            $"Wersja {description.GroupName}");
+    }
+});
 
 app.UseHttpsRedirection();  // Redirect HTTP to HTTPS
 app.UseWebSockets();  // Enable WebSockets

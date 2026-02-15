@@ -10,8 +10,9 @@ using VehicleFleetManagement.Server.Enums;
 using VehicleFleetManagement.Server.Models.DataModels;
 using VehicleFleetManagement.Server.Models.Identity;
 
-namespace VehicleFleetManagement.Server.Controllers
+namespace VehicleFleetManagement.Server.Controllers.V2
 {
+    [ApiVersion("2.0")]
     [Route("api/driver")]
     [ApiController]
     public class DriverController : ControllerBase

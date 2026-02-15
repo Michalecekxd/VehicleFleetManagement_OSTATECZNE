@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using VehicleFleetManagement.Server.Enums;
 using VehicleFleetManagement.Server.Models.Identity;
 
-namespace VehicleFleetManagement.Server.Controllers
+namespace VehicleFleetManagement.Server.Controllers.V2
 {
-    [Route("api/auth")]
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/auth")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController : ControllerBase   // moze tez sie nazywac zamiast AuthController - "AccountController"
     {
         private readonly UserManager<User> _userManager;
         //private readonly RoleManager<Role> _roleManager;
@@ -58,23 +59,22 @@ namespace VehicleFleetManagement.Server.Controllers
 
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginModel model)
+        public async Task<IActionResult> LoginV1([FromBody] LoginModel model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
-                return Unauthorized("Nieprawidłowe dane logowania");
+                return Unauthorized(new { message = "Invalid credentials." });
 
             var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, false);
             if (!result.Succeeded)
-                return Unauthorized("Nieprawidłowe dane logowania");
+                return Unauthorized(new { message = "Invalid credentials." });
 
             var roles = await _userManager.GetRolesAsync(user);
             var role = roles.FirstOrDefault();
 
-            return Ok(new { 
-                message = "Zalogowano pomyślnie",
-                role = role
-            });
+            return Ok(new { message = "Logged in successfully (v1).", role = role });
         }
+
+        /// .... refresh (odswiezenie tokena), forgot-password, reset-password, confirm-email, logout...
     }
 }
